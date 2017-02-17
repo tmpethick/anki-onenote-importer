@@ -67,7 +67,7 @@ class Parser(object):
         # Build the format that the Anki importer can parse.
         output = ''
         table = self.soup.find('table')
-        for row in table.findAll('tr'):
+        for row in table.findAll('tr', recursive=False):
             tds = [td for td in row.findAll(recursive=False, limit=2)]
             question = self._strip_newlines(tds[0].renderContents())
             answer = self._strip_newlines(tds[1].renderContents())
