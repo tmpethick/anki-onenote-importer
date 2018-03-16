@@ -66,12 +66,12 @@ class Parser(object):
 
         # Build the format that the Anki importer can parse.
         output = ''
-        table = self.soup.find('table')
-        for row in table.findAll('tr', recursive=False):
-            tds = [td for td in row.findAll(recursive=False, limit=2)]
-            question = self._strip_newlines(tds[0].renderContents())
-            answer = self._strip_newlines(tds[1].renderContents())
-            output += '%s\t%s\n' % (question, answer)
+        for table  in self.soup.findAll('table'):
+            for row in table.findAll('tr', recursive=False):
+                tds = [td for td in row.findAll(recursive=False, limit=2)]
+                question = self._strip_newlines(tds[0].renderContents())
+                answer = self._strip_newlines(tds[1].renderContents())
+                output += '%s\t%s\n' % (question, answer)
         return output
 
     def _get_absolute_path_from_relative_path(self, relative_path):
